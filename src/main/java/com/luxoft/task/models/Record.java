@@ -11,6 +11,7 @@ import org.springframework.format.annotation.DateTimeFormat;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import javax.validation.constraints.NotBlank;
 import java.time.LocalDateTime;
 import java.util.Objects;
 
@@ -24,6 +25,7 @@ import java.util.Objects;
 public class Record {
 
     @Id
+    @NotBlank(message = "Id must be non blank string!")
     private String id;
 
     private String name;

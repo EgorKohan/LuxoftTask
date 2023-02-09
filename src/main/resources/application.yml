@@ -1,14 +1,24 @@
 spring:
   datasource:
-    url: jdbc:postgresql://localhost:5432/luxoft
-    username: postgres
-    password: root
+    url: ${DATABASE_URL:jdbc:postgresql://localhost:5432/luxoft}
+    username: ${DATABASE_USER:postgres}
+    password: ${DATABASE_PASSWORD:root}
   jpa:
     hibernate:
       ddl-auto: update
     properties:
       hibernate:
         dialect: org.hibernate.dialect.PostgreSQLDialect
+    open-in-view: false
+
+logging:
+  level:
+    root: info
+    com.luxoft.task: debug
+
+server:
+  error:
+    include-message: always
 
 app:
   version: v1
