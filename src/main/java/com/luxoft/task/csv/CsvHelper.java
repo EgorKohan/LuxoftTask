@@ -25,7 +25,7 @@ public class CsvHelper {
 
         List<T> list = new ArrayList<>();
         parser.forEach(csvRecord -> mappingFunction.andThen(list::add).apply(csvRecord));
-        return list.stream().filter(Objects::nonNull).toList();
+        return list.stream().filter(Objects::nonNull).distinct().toList();
     }
 
 

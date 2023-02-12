@@ -21,20 +21,21 @@ import java.util.List;
 @Service
 public class RecordCsvService implements CsvService<Record> {
 
+    private static final String CONTENT_TYPE = "text/csv";
     private static final String[] HEADERS = {"ID", "NAME", "DESCRIPTION", "UPDATED_TIMESTAMP"};
 
     @Override
     public List<Record> csvToList(@NonNull MultipartFile file) {
-        if (!"text/csv".equals(file.getContentType()))
+        if (!CONTENT_TYPE.equals(file.getContentType())) {
             throw new ResponseStatusException(HttpStatus.UNSUPPORTED_MEDIA_TYPE, "File must be CSV format!");
-        InputStream inputStream;
+        }
         try {
             log.info("Reading file {}", file.getOriginalFilename());
-            inputStream = file.getInputStream();
+            InputStream inputStream = file.getInputStream();
+            return csvToList(inputStream);
         } catch (IOException e) {
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, e.getMessage());
         }
-        return csvToList(inputStream);
     }
 
     @Override

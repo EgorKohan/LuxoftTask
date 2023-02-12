@@ -35,18 +35,16 @@ public class RecordServiceImpl implements RecordService {
 
     @Override
     public Integer saveAll(Collection<Record> records) {
-        recordRepository.saveAll(records);
-        log.debug("Saved {} records", records.size());
-        return records.size();
+        List<Record> savedRecords = recordRepository.saveAll(records);
+        log.debug("Saved {} records", savedRecords.size());
+        return savedRecords.size();
     }
 
     @Override
     public Record deleteById(String id) {
         Record rec = findById(id);
-        if (rec != null) {
-            recordRepository.deleteById(id);
-            log.debug("Record with id {} was deleted", rec.getId());
-        }
+        recordRepository.deleteById(id);
+        log.debug("Record with id {} was deleted", rec.getId());
         return rec;
     }
 }

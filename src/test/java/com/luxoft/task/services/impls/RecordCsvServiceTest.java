@@ -68,7 +68,7 @@ class RecordCsvServiceTest {
 
     @Test
     void givenCsvWithEmptyId_whenRead_thenEmptyList() {
-        InputStream resourceAsStream = this.getClass().getResourceAsStream("/csvs/emptyIdCortage.csv");
+        InputStream resourceAsStream = this.getClass().getResourceAsStream("/csvs/emptyIdTuple.csv");
 
         List<Record> records = recordCsvService.csvToList(resourceAsStream);
 
